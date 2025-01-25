@@ -11,6 +11,13 @@ class Play extends Phaser.Scene {
     });
     this.backgroundMusic.play(); // Play the musics
 
+    // Speed increase after 30 seconds
+this.time.delayedCall(30000, () => {
+  this.ship01.moveSpeed += 2;
+  this.ship02.moveSpeed += 2;
+  this.ship03.moveSpeed += 2;
+});
+
     this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
 
     this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
@@ -187,4 +194,9 @@ class Play extends Phaser.Scene {
     this.sound.play('sfx-explosion');
   }
 }
+
+
+
+
+
 

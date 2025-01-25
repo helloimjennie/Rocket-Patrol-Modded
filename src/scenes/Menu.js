@@ -41,11 +41,13 @@ class Menu extends Phaser.Scene {
       frameRate: 30
     });
 
+    this.cameras.main.setBackgroundColor('#503771');
+
     let menuConfig = {
-      fontFamily: 'Courier',
-      fontSize: '28px',
-      backgroundColor: '#F3B141',
-      color: '#843605',
+      fontFamily: 'Optima',
+      fontSize: '23px',
+      backgroundColor: '#a389dc',
+      color: '#ffffff',
       align: 'right',
       padding: {
         top: 5,
@@ -57,29 +59,29 @@ class Menu extends Phaser.Scene {
     // Display menu text
     this.add.text(
       game.config.width / 2,
-      game.config.height / 2 - borderUISize - borderPadding,
-      'ROCKET PATROL',
+      game.config.height / 3 - borderUISize - borderPadding,
+      'Welcome to the Best Game Ever',
       menuConfig
     ).setOrigin(0.5);
 
     this.add.text(
       game.config.width / 2,
-      game.config.height / 2,
-      'Use ←→ arrows to move & (F) to fire',
+      game.config.height / 3,
+      'Use your mouse to control the rocket and click to shoot!',
       menuConfig
     ).setOrigin(0.5);
 
-    menuConfig.backgroundColor = '#00FF00';
-    menuConfig.color = '#000';
+    menuConfig.backgroundColor = '#a389dc';
+    menuConfig.color = '#ffffff';
     this.add.text(
       game.config.width / 2,
-      game.config.height / 2 + borderUISize + borderPadding,
-      'Press ← for Novice or → for Expert',
+      game.config.height / 1.5 + borderUISize + borderPadding,
+      'Made by Jennie Le',
       menuConfig
     ).setOrigin(0.5);
 
     // Display high score
-    menuConfig.backgroundColor = '#000';
+    menuConfig.backgroundColor = '#503771';
     menuConfig.color = '#FFF';
     this.add.text(
       game.config.width / 2,
