@@ -1,6 +1,6 @@
 // Jennie Le
 // Rocket Patrol
-// Took me about 10 hours 
+// Took me about 8 hours 
 // Rocket Patrol Mods:
 // Display the time remaining (in seconds) on the screen (3)
 // Track a high score that persists across scenes and display it in the UI (1)
@@ -8,6 +8,8 @@
 // Implement mouse control for player movement and left mouse click to fire (5)
 // Randomize each spaceship's movement direction at the start of each play (1)
 // Create a new title screen (e.g., new artwork, typography, layout) (3)
+// Implement the speed increase that happens after 30 seconds in the original game (1)
+// Create a new enemy Spaceship type (w/ new artwork) that's smaller, moves faster, and is worth more points (5)
 
 let config = {
   type: Phaser.AUTO,

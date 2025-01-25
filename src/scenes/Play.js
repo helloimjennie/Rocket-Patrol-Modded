@@ -12,11 +12,12 @@ class Play extends Phaser.Scene {
     this.backgroundMusic.play(); // Play the musics
 
     // Speed increase after 30 seconds
-this.time.delayedCall(30000, () => {
-  this.ship01.moveSpeed += 2;
-  this.ship02.moveSpeed += 2;
-  this.ship03.moveSpeed += 2;
-});
+    this.time.delayedCall(30000, () => {
+      this.ship01.moveSpeed += 2;
+      this.ship02.moveSpeed += 2;
+      this.ship03.moveSpeed += 2;
+      this.ship04.moveSpeed += 2;
+    });
 
     this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
 
@@ -28,6 +29,9 @@ this.time.delayedCall(30000, () => {
     this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
 
     this.p1Rocket = new Rocket(this, game.config.width / 2, game.config.height - borderUISize - borderPadding, 'rocket').setOrigin(0.5, 0);
+
+    // small spaceship added
+    this.ship04 = new TinySpaceship(this, game.config.width, borderUISize * 6 + borderPadding * 4, 'tinyspaceship', 0, 100).setOrigin(0, 0)
 
     this.ship01 = new Spaceship(this, game.config.width + borderUISize * 6, borderUISize * 4, 'spaceship', 0, 30).setOrigin(0, 0);
     this.ship02 = new Spaceship(this, game.config.width + borderUISize * 3, borderUISize * 5 + borderPadding * 2, 'spaceship', 0, 20).setOrigin(0, 0);
@@ -65,7 +69,7 @@ this.time.delayedCall(30000, () => {
 
     this.gameOver = false;
 
-    // Timer
+
     this.time.addEvent({
       delay: 1000,
       callback: () => {
@@ -84,20 +88,20 @@ this.time.delayedCall(30000, () => {
   handleGameOver() {
     this.gameOver = true;
 
-    // Stop background music
+
     this.backgroundMusic.stop();
 
-    // Update the high score if necessary
+
     if (this.p1Score > game.highScore) {
       game.highScore = this.p1Score;
     }
 
     // Display Game Over and High Score
     this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', {
-      fontFamily: 'Courier',
+      fontFamily: 'Optima',
       fontSize: '28px',
-      backgroundColor: '#F3B141',
-      color: '#843605',
+      backgroundColor: '#a389dc',
+      color: '#ffffff',
       align: 'center',
     }).setOrigin(0.5);
 
@@ -106,10 +110,10 @@ this.time.delayedCall(30000, () => {
       game.config.height / 2 + 64,
       `High Score: ${game.highScore}`,
       {
-        fontFamily: 'Courier',
+        fontFamily: 'Optima',
         fontSize: '24px',
-        backgroundColor: '#F3B141',
-        color: '#843605',
+        backgroundColor: '#a389dc',
+        color: '#ffffff',
         align: 'center',
       }
     ).setOrigin(0.5);
@@ -119,10 +123,10 @@ this.time.delayedCall(30000, () => {
       game.config.height / 2 + 128,
       'Returning to Main Menu...',
       {
-        fontFamily: 'Courier',
+        fontFamily: 'Optima',
         fontSize: '24px',
-        backgroundColor: '#F3B141',
-        color: '#843605',
+        backgroundColor: '#a389dc',
+        color: '#ffffff',
         align: 'center',
       }
     ).setOrigin(0.5);
@@ -149,8 +153,14 @@ this.time.delayedCall(30000, () => {
       this.ship01.update();
       this.ship02.update();
       this.ship03.update();
-    }
+      this.ship04.update()
+      }
 
+      // check collsion
+      if (this.checkCollision(this.p1Rocket, this.ship04)) {
+        this.p1Rocket.reset()
+        this.shipExplode(this.ship04)
+    }
     if (this.checkCollision(this.p1Rocket, this.ship03)) {
       this.p1Rocket.reset();
       this.shipExplode(this.ship03);

@@ -4,20 +4,19 @@ class Menu extends Phaser.Scene {
   }
 
   preload() {
-    // load images/tile sprites
+    
     this.load.image('rocket', './assets/rocket.png');
     this.load.image('spaceship', './assets/spaceship.png');
     this.load.image('starfield', './assets/starfield.png');
-    this.load.image('particle', './assets/particle.png');
+    this.load.image('tinyspaceship', './assets/tinyspaceship.png')
 
-    // load spritesheet
     this.load.spritesheet('explosion', './assets/explosion.png', {
       frameWidth: 64,
       frameHeight: 32,
       startFrame: 0,
       endFrame: 9
     });
-    // load audio
+    
     this.load.audio('sfx-select', './assets/sfx-select.wav');
     this.load.audio('sfx-explosion', './assets/sfx-explosion.wav');
     this.load.audio('sfx-shot', './assets/sfx-shot.wav');
@@ -25,12 +24,12 @@ class Menu extends Phaser.Scene {
   }
 
   create() {
-    // Initialize global high score if it doesn't exist
+    
     if (typeof game.highScore === 'undefined') {
-      game.highScore = 0; // Set initial high score to 0
+      game.highScore = 0; 
     }
 
-    // Animation configuration
+    
     this.anims.create({
       key: 'explode',
       frames: this.anims.generateFrameNumbers('explosion', {
@@ -56,7 +55,7 @@ class Menu extends Phaser.Scene {
       fixedWidth: 0
     };
 
-    // Display menu text
+    
     this.add.text(
       game.config.width / 2,
       game.config.height / 3 - borderUISize - borderPadding,
@@ -80,7 +79,7 @@ class Menu extends Phaser.Scene {
       menuConfig
     ).setOrigin(0.5);
 
-    // Display high score
+    
     menuConfig.backgroundColor = '#503771';
     menuConfig.color = '#FFF';
     this.add.text(
@@ -90,14 +89,14 @@ class Menu extends Phaser.Scene {
       menuConfig
     ).setOrigin(0.5);
 
-    // Define keys
+    
     keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
     keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
   }
 
   update() {
     if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-      // Easy mode
+     
       game.settings = {
         spaceshipSpeed: 3,
         gameTimer: 60000
@@ -106,7 +105,7 @@ class Menu extends Phaser.Scene {
       this.scene.start('playScene');
     }
     if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
-      // Hard mode
+     
       game.settings = {
         spaceshipSpeed: 4,
         gameTimer: 45000
