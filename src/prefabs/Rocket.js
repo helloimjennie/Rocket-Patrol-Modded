@@ -1,19 +1,19 @@
 class Rocket extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
-        
-        scene.add.existing(this); 
-        this.isFiring = false; 
-        this.moveSpeed = 2; 
+
+        scene.add.existing(this);
+        this.isFiring = false;
+        this.moveSpeed = 2;
         this.sfxShot = scene.sound.add('sfx-shot');
 
-        // Enable mouse input for movement and firing
-        scene.input.on('pointermove', this.handleMouseMove, this); // Mouse movement
-        scene.input.on('pointerdown', this.handleMouseFire, this); // Mouse firing
+        // enable mouse for movement and fire
+        scene.input.on('pointermove', this.handleMouseMove, this); // mouse movement
+        scene.input.on('pointerdown', this.handleMouseFire, this); // mouse firing
     }
 
     update() {
-        // Keyboard movement if not firing
+        // keyboard movement if not firing
         if (!this.isFiring) {
             if (keyLEFT.isDown && this.x >= borderUISize + this.width) {
                 this.x -= this.moveSpeed;
@@ -22,36 +22,36 @@ class Rocket extends Phaser.GameObjects.Sprite {
             }
         }
 
-        // Keyboard firing
+        // keyboard firing
         if (Phaser.Input.Keyboard.JustDown(keyFIRE) && !this.isFiring) {
             this.isFiring = true;
             this.sfxShot.play();
         }
 
-        // Move rocket upwards if fired
+        // this move rocket upwards if fired
         if (this.isFiring && this.y >= borderUISize + 3 * borderPadding) {
             this.y -= this.moveSpeed;
         }
 
-        // Reset rocket on miss
+        // reset rocket on miss
         if (this.y <= borderUISize + 3 * borderPadding) {
             this.reset();
         }
     }
 
-    // Handle mouse movement
+    // handle mouse movement
     handleMouseMove(pointer) {
         if (!this.isFiring) {
-            // Update rocket's horizontal position based on mouse pointer
+            // update rocket's horizontal position based on mouse pointer
             this.x = Phaser.Math.Clamp(
-                pointer.worldX, 
-                borderUISize + this.width, 
+                pointer.worldX,
+                borderUISize + this.width,
                 game.config.width - borderUISize - this.width
             );
         }
     }
 
-    // Handle mouse firing
+    // handle mouse firing
     handleMouseFire(pointer) {
         if (!this.isFiring) {
             this.isFiring = true;

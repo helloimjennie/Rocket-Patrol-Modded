@@ -1,6 +1,6 @@
 // Jennie Le
-// Rocket Patrol
-// Took me about 8 hours 
+// Rocket Patrol: Da Best Game
+// Took me about 8 hours
 // Rocket Patrol Mods:
 // Display the time remaining (in seconds) on the screen (3)
 // Track a high score that persists across scenes and display it in the UI (1)
@@ -15,14 +15,12 @@ let config = {
   type: Phaser.AUTO,
   width: 640,
   height: 480,
-  scene: [ Menu, Play ]
+  scene: [Menu, Play]
 }
 
 let game = new Phaser.Game(config);
 
-// set UI sizes
 let borderUISize = game.config.height / 15
 let borderPadding = borderUISize / 3
 
-// reserve keyboard bindings
 let keyFIRE, keyRESET, keyLEFT, keyRIGHT

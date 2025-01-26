@@ -4,14 +4,14 @@ class Play extends Phaser.Scene {
   }
 
   create() {
-    // Add background music
+    // adding background music
     this.backgroundMusic = this.sound.add('musicbackground', {
-      volume: 0.5, // Adjust the volume (0.0 to 1.0)
-      loop: true,  // Enable looping
+      volume: 0.5, // adjusting the volume
+      loop: true,  // this enables the looping
     });
-    this.backgroundMusic.play(); // Play the musics
+    this.backgroundMusic.play(); // this plays the music
 
-    // Speed increase after 30 seconds
+    // the speed increases after 30 secs
     this.time.delayedCall(30000, () => {
       this.ship01.moveSpeed += 2;
       this.ship02.moveSpeed += 2;
@@ -96,7 +96,7 @@ class Play extends Phaser.Scene {
       game.highScore = this.p1Score;
     }
 
-    // Display Game Over and High Score
+    // displaying high score & game over screen
     this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', {
       fontFamily: 'Optima',
       fontSize: '28px',
@@ -131,7 +131,6 @@ class Play extends Phaser.Scene {
       }
     ).setOrigin(0.5);
 
-    // Delay before returning to the menu
     this.time.delayedCall(3000, () => {
       this.scene.start("menuScene");
     });
@@ -139,11 +138,11 @@ class Play extends Phaser.Scene {
 
   update() {
     if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyRESET)) {
-      this.backgroundMusic.stop(); // Stop the music
+      this.backgroundMusic.stop(); // stop the music
       this.scene.restart();
     }
     if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-      this.backgroundMusic.stop(); // Stop the music
+      this.backgroundMusic.stop();
       this.scene.start("menuScene");
     }
     this.starfield.tilePositionX -= 4;
@@ -154,12 +153,11 @@ class Play extends Phaser.Scene {
       this.ship02.update();
       this.ship03.update();
       this.ship04.update()
-      }
+    }
 
-      // check collsion
-      if (this.checkCollision(this.p1Rocket, this.ship04)) {
-        this.p1Rocket.reset()
-        this.shipExplode(this.ship04)
+    if (this.checkCollision(this.p1Rocket, this.ship04)) {
+      this.p1Rocket.reset()
+      this.shipExplode(this.ship04)
     }
     if (this.checkCollision(this.p1Rocket, this.ship03)) {
       this.p1Rocket.reset();
